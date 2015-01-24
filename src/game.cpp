@@ -1,6 +1,6 @@
 #include "game.h"
 
-static const float		PlayerSpeed = 10.f;
+static const float		PlayerSpeed = 100.f;
 static const sf::Time	TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML App"), mPlayer(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
