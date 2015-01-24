@@ -23,16 +23,6 @@ class	Aircraft : public Entity
 		sf::Sprite	mSprite;
 };
 
-Textures::ID	toTextureID(Aircraft::Type type)
-{
-	switch (type)
-	{
-		case Aircraft::Eagle:
-			return Textures::Eagle;
-		case Aircraft::Raptor:
-			return Textures::Raptor;
-	}
-	return Textures::Eagle;
-}
+Textures::ID	toTextureID(Aircraft::Type type);
 
 #endif /* !_AIRCRAFT_H_ */

@@ -11,3 +11,16 @@ void	Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 {
 	target.draw(mSprite, states);
 }
+
+Textures::ID	toTextureID(Aircraft::Type type)
+{
+	switch (type)
+	{
+		case Aircraft::Eagle:
+			return Textures::Eagle;
+		case Aircraft::Raptor:
+			return Textures::Raptor;
+	}
+	return Textures::Eagle;
+}
+
