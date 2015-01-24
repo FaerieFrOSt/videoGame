@@ -6,7 +6,7 @@ PREFIX = .
 
 EXE = a.out
 
-SFML = /home/faerie/C++/SFML-2.2
+SFML = $(PREFIX)/SFML-2.2
 
 INC = -I$(PREFIX)/include -I$(SFML)/include
 
