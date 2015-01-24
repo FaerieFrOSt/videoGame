@@ -29,7 +29,7 @@ Resource&	ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
 	auto	found = mResourceMap.find(id);
 	
-	asset(found != mResourceMap.end());
+	assert(found != mResourceMap.end());
 	return *found->second;
 }
 
@@ -38,6 +38,6 @@ const Resource&	ResourceHolder<Resource, Identifier>::get(Identifier id) const
 {
 	auto	found = mResourceMap.find(id);
 	
-	asset(found != mResourceMap.end());
+	assert(found != mResourceMap.end());
 	return *found->second;
 }
