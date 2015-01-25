@@ -1,10 +1,19 @@
 #include "player.h"
 #include "aircraft.h"
+#include <iostream>
 
 void	Player::handleEvent(const sf::Event& event, CommandQueue& commands)
 {
-	(void)event;
-	(void)commands;
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+	{
+		Command	output;
+		output.category = Category::PlayerAircraft;
+		output.action = [] (SceneNode& s, sf::Time)
+		{
+			std::cout << s.getWorldPosition().x << ", " << s.getWorldPosition().y << std::endl;
+		};
+		commands.push(output);
+	}
 }
 
 void	Player::handleRealtimeInput(CommandQueue& commands)
