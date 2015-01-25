@@ -4,6 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "world.h"
+#include "player.h"
 
 class	Game
 {
@@ -12,10 +13,9 @@ class	Game
 		void	run();
 
 	private:
-		void	processEvents();
+		void	processInput();
 		void	update(sf::Time dt);
 		void	render();
-		void	handlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
 		void	updateStatistics(sf::Time elapsedTime);
 
@@ -25,11 +25,8 @@ class	Game
 		sf::Text			mStatisticsText;
 		sf::Time			mStatisticsUpdateTime;
 		std::size_t			mStatisticsNumFrames;
-		bool				mIsMovingUp;
-		bool				mIsMovingDown;
-		bool				mIsMovingLeft;
-		bool				mIsMovingRight;
 		World				mWorld;
+		Player				mPlayer;
 };
 
 #endif /* !_GAME_H_ */

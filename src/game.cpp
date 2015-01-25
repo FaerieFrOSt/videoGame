@@ -3,8 +3,7 @@
 static const sf::Time	TimePerFrame = sf::seconds(1.f / 60.f);
 
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML App"), mFont(), mStatisticsText(),
-	mStatisticsUpdateTime(), mStatisticsNumFrames(0), mIsMovingUp(false),
-	mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
+	mStatisticsUpdateTime(), mStatisticsNumFrames(0), mWorld(mWindow)
 {
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
@@ -19,12 +18,12 @@ void	Game::run()
 
 	while (mWindow.isOpen())
 	{
-		processEvents();
+		processInput();
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
-			processEvents();
+			processInput();
 			update(TimePerFrame);
 		}
 		updateStatistics(timeSinceLastUpdate);
@@ -32,25 +31,19 @@ void	Game::run()
 	}
 }
 
-void	Game::processEvents()
+void	Game::processInput()
 {
-	sf::Event	event;
+	CommandQueue&	commands = mWorld.getCommandQueue();
 
+	sf::Event	event;
 	while (mWindow.pollEvent(event))
-		switch (event.type)
-		{
-			case sf::Event::KeyPressed:
-				handlePlayerInput(event.key.code, true);
-				break;
-			case sf::Event::KeyReleased:
-				handlePlayerInput(event.key.code, false);
-				break;
-			case sf::Event::Closed:
-				mWindow.close();
-				break;
-			default:
-				break;
-		}
+	{
+		mPlayer.handleEvent(event, commands);
+		if (event.type == sf::Event::Closed)
+			mWindow.close();
+	}
+
+	mPlayer.handleRealtimeInput(commands);
 }
 
 void	Game::update(sf::Time dt)
@@ -65,18 +58,6 @@ void	Game::render()
 	mWindow.setView(mWindow.getDefaultView());
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
-}
-
-void	Game::handlePlayerInput(sf::Keyboard::Key key, bool isPressed)
-{
-	if (key == sf::Keyboard::Z)
-		mIsMovingUp = isPressed;
-	else if (key == sf::Keyboard::S)
-		mIsMovingDown = isPressed;
-	else if (key == sf::Keyboard::Q)
-		mIsMovingLeft = isPressed;
-	else if (key == sf::Keyboard::D)
-		mIsMovingRight = isPressed;
 }
 
 void	Game::updateStatistics(sf::Time elapsedTime)

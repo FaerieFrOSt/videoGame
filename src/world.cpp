@@ -67,6 +67,14 @@ void	World::update(sf::Time dt)
 		mPlayerAircraft->setVelocity(velocity);
 	}
 
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+
 	mSceneGraph.update(dt);
+}
+
+CommandQueue&	World::getCommandQueue()
+{
+	return mCommandQueue;
 }
 

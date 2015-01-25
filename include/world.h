@@ -6,6 +6,7 @@
 #include "texturesholder.h"
 #include "scenenode.h"
 #include "aircraft.h"
+#include "command.h"
 #include <array>
 
 class	World : private sf::NonCopyable
@@ -13,8 +14,9 @@ class	World : private sf::NonCopyable
 	public:
 		explicit	World(sf::RenderWindow& window);
 
-		void		update(sf::Time dt);
-		void		draw();
+		void			update(sf::Time dt);
+		void			draw();
+		CommandQueue&	getCommandQueue();
 
 	private:
 		void	loadTextures();
@@ -33,6 +35,7 @@ class	World : private sf::NonCopyable
 		sf::View							mWorldView;
 		TextureHolder						mTextures;
 		SceneNode							mSceneGraph;
+		CommandQueue						mCommandQueue;
 
 		std::array<SceneNode*, LayerCount>	mSceneLayers;
 		sf::FloatRect						mWorldBounds;

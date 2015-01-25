@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 #include "command.h"
 
+struct	Command;
+
 class	SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 	public:
