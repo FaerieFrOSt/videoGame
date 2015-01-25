@@ -3,6 +3,7 @@
 # define _GAME_H_
 
 #include <SFML/Graphics.hpp>
+#include "world.h"
 
 class	Game
 {
@@ -20,8 +21,6 @@ class	Game
 
 	private:
 		sf::RenderWindow	mWindow;
-		sf::Sprite			mPlayer;
-		sf::Texture			mTexture;
 		sf::Font			mFont;
 		sf::Text			mStatisticsText;
 		sf::Time			mStatisticsUpdateTime;
@@ -30,6 +29,7 @@ class	Game
 		bool				mIsMovingDown;
 		bool				mIsMovingLeft;
 		bool				mIsMovingRight;
+		World				mWorld;
 };
 
 #endif /* !_GAME_H_ */

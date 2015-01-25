@@ -1,20 +1,15 @@
 #include "game.h"
 
-static const float		PlayerSpeed = 100.f;
 static const sf::Time	TimePerFrame = sf::seconds(1.f / 60.f);
 
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML App"), mPlayer(), mTexture(), mFont(), mStatisticsText(), mStatisticsUpdateTime(), mStatisticsNumFrames(0), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML App"), mFont(), mStatisticsText(),
+	mStatisticsUpdateTime(), mStatisticsNumFrames(0), mIsMovingUp(false),
+	mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
 {
-	if (!mTexture.loadFromFile("media/textures/Eagle.png"))
-	{
-		// Handle loading error
-	}
 	mFont.loadFromFile("media/Sansation.ttf");
 	mStatisticsText.setFont(mFont);
 	mStatisticsText.setPosition(5.f, 5.f);
 	mStatisticsText.setCharacterSize(10);
-	mPlayer.setTexture(mTexture);
-	mPlayer.setPosition(100.f, 100.f);
 }
 
 void	Game::run()
@@ -58,26 +53,16 @@ void	Game::processEvents()
 		}
 }
 
-void	Game::update(sf::Time deltaTime)
+void	Game::update(sf::Time dt)
 {
-	sf::Vector2f	movement(0.f, 0.f);
-
-	if (mIsMovingUp)
-		movement.y -= PlayerSpeed;
-	if (mIsMovingDown)
-		movement.y += PlayerSpeed;
-	if (mIsMovingLeft)
-		movement.x -= PlayerSpeed;
-	if (mIsMovingRight)
-		movement.x += PlayerSpeed;
-
-	mPlayer.move(movement * deltaTime.asSeconds());
+	mWorld.update(dt);
 }
 
 void	Game::render()
 {
 	mWindow.clear();
-	mWindow.draw(mPlayer);
+	mWorld.draw();
+	mWindow.setView(mWindow.getDefaultView());
 	mWindow.draw(mStatisticsText);
 	mWindow.display();
 }
