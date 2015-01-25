@@ -21,6 +21,7 @@ class	SceneNode : public sf::Transformable, public sf::Drawable, private sf::Non
 		void	update(sf::Time dt);
 
 		virtual unsigned int	getCategory() const;
+		void	onCommand(const Command& command, sf::Time dt);
 
 		sf::Vector2f	getWorldPosition() const;
 

@@ -22,7 +22,10 @@ namespace	Category
 
 struct	Command
 {
+	Command();
+
 	std::function<void(SceneNode&, sf::Time)>	action;
+	unsigned int	category;
 };
 
 #endif /* !_COMMAND_H_ */
