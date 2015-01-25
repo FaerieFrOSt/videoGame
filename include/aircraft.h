@@ -27,4 +27,16 @@ class	Aircraft : public Entity
 
 Textures::ID	toTextureID(Aircraft::Type type);
 
+struct	AircraftMover
+{
+	AircraftMover(float vx, float vy) : velocity(vx, vy)
+	{}
+
+	void	operator()(Aircraft& aircraft, sf::Time) const
+	{
+		aircraft.accelerate(velocity);
+	}
+	sf::Vector2f	velocity;
+};
+
 #endif /* !_AIRCRAFT_H_ */
