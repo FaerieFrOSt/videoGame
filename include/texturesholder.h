@@ -11,6 +11,7 @@ namespace	Textures
 		Eagle,
 		Raptor,
 		Desert,
+		TitleScreen,
 	};
 }
 
