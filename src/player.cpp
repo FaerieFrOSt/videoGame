@@ -9,6 +9,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
 	mKeyBinding[sf::Keyboard::Down] = MoveDown;
 	mKeyBinding[sf::Keyboard::P] = Debug;
+	mKeyBinding[sf::Keyboard::Escape] = Pause;
 
 	const float	playerSpeed = 60.f;
 	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));

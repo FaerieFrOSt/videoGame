@@ -1,4 +1,5 @@
 #include "titlestate.h"
+#include "utility.h"
 
 TitleState::TitleState(StateStack& stack, Context context) : State(stack, context),
 	mBackgroundSprite(context.textures->get(Textures::TitleScreen)), mText(), mShowText(true), mTextEffectTime()
@@ -6,7 +7,8 @@ TitleState::TitleState(StateStack& stack, Context context) : State(stack, contex
 	mText.setFont(context.fonts->get(Fonts::Main));
 	mText.setCharacterSize(20u);
 	mText.setString("Press any key to continue");
-	mText.setPosition(100.f, 100.f);
+	centerOrigin(mText);
+	mText.setPosition(context.window->getView().getSize() / 2.f);
 }
 
 void	TitleState::draw()
@@ -24,7 +26,7 @@ bool	TitleState::handleEvent(const sf::Event& event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		requestStackPop();
-		requestStackPush(States::Game);
+		requestStackPush(States::Menu);
 	}
 	return true;
 }

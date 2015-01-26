@@ -41,7 +41,7 @@ class	StateStack : private sf::NonCopyable
 		void	popState();
 		void	clearStates();
 
-		bool	isEmpy() const;
+		bool	isEmpty() const;
 
 	private:
 		State::Ptr	createState(States::ID stateID);

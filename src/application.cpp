@@ -23,9 +23,9 @@ Application::Application() : mWindow(sf::VideoMode(640, 480), "SFML App"), mText
 void	Application::registerStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
-	/* mStateStack.registerState<MenuState>(States::Menu); */
+	mStateStack.registerState<MenuState>(States::Menu);
 	mStateStack.registerState<GameState>(States::Game);
-	/* mStateStack.registerState<PauseState>(States::Pause); */
+	mStateStack.registerState<PauseState>(States::Pause);
 }
 
 void	Application::processInput()
@@ -68,6 +68,8 @@ void	Application::run()
 			timeSinceLastUpdate -= TimePerFrame;
 			processInput();
 			update(TimePerFrame);
+			if (mStateStack.isEmpty())
+				mWindow.close();
 		}
 		updateStatistics(timeSinceLastUpdate);
 		render();

@@ -16,6 +16,8 @@ class	GameState : public State
 		virtual bool	update(sf::Time dt);
 		virtual bool	handleEvent(const sf::Event& event);
 
+		void			setPause();
+
 	private:
 		World	mWorld;
 		Player	&mPlayer;

@@ -21,5 +21,7 @@ bool	GameState::handleEvent(const sf::Event& event)
 {
 	CommandQueue& commands = mWorld.getCommandQueue();
 	mPlayer.handleEvent(event, commands);
+	if (event.key.code == mPlayer.getAssignedKey(Player::Pause))
+		requestStackPush(States::Pause);
 	return true;
 }

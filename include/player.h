@@ -15,6 +15,7 @@ class	Player
 			MoveUp,
 			MoveDown,
 			Debug,
+			Pause,
 		};
 
 		Player();
@@ -24,10 +25,8 @@ class	Player
 		void				assignKey(Action action, sf::Keyboard::Key key);
 		sf::Keyboard::Key	getAssignedKey(Action action) const;
 
-		bool	isRealtimeAction(Action action) const;
-
 	private:
-		static bool	isRealTimeAction(Action action);
+		bool	isRealtimeAction(Action action) const;
 
 	private:
 		std::map<sf::Keyboard::Key, Action>	mKeyBinding;
