@@ -1,18 +1,27 @@
 #include "pausestate.h"
 #include "utility.h"
+#include "gui/label.h"
+#include "gui/button.h"
+#include <memory>
 
 PauseState::PauseState(StateStack& stack, Context context) : State(stack, context),
-	mPausedText(), mInstructionText()
+	mContainer()
 {
-	mPausedText.setFont(context.fonts->get(Fonts::Main));
-	mInstructionText.setFont(context.fonts->get(Fonts::Main));
-	mPausedText.setString("Game paused");
-	mInstructionText.setString("Press ESC to return to the game.\nPress BACKSPACE to return to the menu.");
-	centerOrigin(mPausedText);
-	centerOrigin(mInstructionText);
-	mPausedText.setPosition(context.window->getView().getSize() / 2.f);
-	mInstructionText.setPosition(mPausedText.getPosition());
-	mInstructionText.move(0.F, 50.f);
+	auto	pausedText = std::make_shared<GUI::Label>("Game paused", context.fonts->get(Fonts::Main));
+	mContainer.pack(pausedText);
+	auto	returnButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
+	returnButton->setText("Return to game");
+	returnButton->setCallback([this] () {
+			requestStackPop();
+			});
+	mContainer.pack(returnButton);
+	auto	menuButton = std::make_shared<GUI::Button>(*context.fonts, *context.textures);
+	menuButton->setText("Exit to main menu");
+	menuButton->setCallback([this] () {
+			requestStackClear();
+			requestStackPush(States::Menu);
+			});
+	mContainer.pack(menuButton);
 }
 
 void	PauseState::draw()
@@ -25,8 +34,7 @@ void	PauseState::draw()
 	backgroundShape.setSize(sf::Vector2f(window.getSize()));
 
 	window.draw(backgroundShape);
-	window.draw(mPausedText);
-	window.draw(mInstructionText);
+	window.draw(mContainer);
 }
 
 bool	PauseState::update(sf::Time)
@@ -36,14 +44,6 @@ bool	PauseState::update(sf::Time)
 
 bool	PauseState::handleEvent(const sf::Event& event)
 {
-	if (event.type != sf::Event::KeyPressed)
-		return false;
-	if (event.key.code == sf::Keyboard::Escape)
-		requestStackPop();
-	else if (event.key.code == sf::Keyboard::BackSpace)
-	{
-		requestStackClear();
-		requestStackPush(States::Menu);
-	}
+	mContainer.handleEvent(event);
 	return false;
 }

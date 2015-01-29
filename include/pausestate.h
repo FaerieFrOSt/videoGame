@@ -3,6 +3,7 @@
 # define _PAUSESTATE_H_
 
 #include "state.h"
+#include "gui/container.h"
 
 class	PauseState : public State
 {
@@ -14,8 +15,7 @@ class	PauseState : public State
 		virtual bool	handleEvent(const sf::Event& event);
 
 	private:
-		sf::Text	mPausedText;
-		sf::Text	mInstructionText;
+		GUI::Container	mContainer;
 };
 
 #endif /* !_PAUSESTATE_H_ */
