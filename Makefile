@@ -16,7 +16,9 @@ LIB = -L$(SFML)/lib -lsfml-graphics -lsfml-window -lsfml-system
 
 SRCDIR = $(PREFIX)/src
 
-SRC = $(wildcard $(SRCDIR)/*$(SUFFIX))
+SRCSUBDIR = $(PREFIX)/src/gui
+
+SRC = $(wildcard $(SRCDIR)/*$(SUFFIX)) $(wildcard $(SRCSUBDIR)/*$(SUFFIX))
 
 OBJDIR = $(PREFIX)/obj
 
