@@ -18,7 +18,7 @@ namespace	GUI
 
 		private:
 			virtual void	draw(sf::RenderTarget& target, sf::RenderStates states) const;
-			void			select(std::size_t index);
+			void			select_private(std::size_t index);
 			void			selectPrevious();
 			void			selectNext();
 			bool			hasSelection() const;

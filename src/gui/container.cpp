@@ -9,7 +9,7 @@ namespace	GUI
 	{
 		mChildren.push_back(component);
 		if (!hasSelection() && component->isSelectable())
-			select(mChildren.size() - 1);
+			select_private(mChildren.size() - 1);
 	}
 
 	bool	Container::isSelectable() const
@@ -21,13 +21,13 @@ namespace	GUI
 	{
 		if (hasSelection() && mChildren[mSelectedChild]->isActive())
 			mChildren[mSelectedChild]->handleEvent(event);
-		else if (event.type == sf::Event::KeyReleased)
+		else if (event.type == sf::Event::KeyPressed)
 		{
 			if (event.key.code == sf::Keyboard::Up)
 				selectPrevious();
 			else if (event.key.code == sf::Keyboard::Down)
 				selectNext();
-			else if (event.key.code == sf::Keyboard::Space)
+			else if (event.key.code == sf::Keyboard::Return)
 				if (hasSelection())
 					mChildren[mSelectedChild]->activate();
 		}
@@ -38,7 +38,7 @@ namespace	GUI
 		return mSelectedChild != -1;
 	}
 
-	void	Container::select(std::size_t index)
+	void	Container::select_private(std::size_t index)
 	{
 		if (mChildren[index]->isSelectable())
 		{
@@ -57,7 +57,7 @@ namespace	GUI
 		do
 			next = (next + 1) % mChildren.size();
 		while (!mChildren[next]->isSelectable());
-		select(next);
+		select_private(next);
 	}
 
 	void	Container::selectPrevious()
@@ -68,7 +68,7 @@ namespace	GUI
 		do
 			previous = (previous + mChildren.size() - 1) % mChildren.size();
 		while (!mChildren[previous]->isSelectable());
-		select(previous);
+		select_private(previous);
 	}
 
 	void	Container::draw(sf::RenderTarget& target, sf::RenderStates states) const
