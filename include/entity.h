@@ -5,6 +5,8 @@
 #include "scenenode.h"
 #include <cassert>
 
+class	SceneNode;
+
 class	Entity : public SceneNode
 {
 	public:
