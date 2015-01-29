@@ -13,6 +13,9 @@ Application::Application() : mWindow(sf::VideoMode(640, 480), "SFML App"), mText
 	mWindow.setKeyRepeatEnabled(false);
 	mFonts.load(Fonts::Main, "media/Sansation.ttf");
 	mTextures.load(Textures::TitleScreen, "media/textures/TitleScreen.png");
+	mTextures.load(Textures::ButtonNormal, "media/textures/ButtonNormal.png");
+	mTextures.load(Textures::ButtonSelected, "media/textures/ButtonSelected.png");
+	mTextures.load(Textures::ButtonPressed, "media/textures/ButtonPressed.png");
 	mStatisticsText.setFont(mFonts.get(Fonts::Main));
 	mStatisticsText.setCharacterSize(10u);
 	mStatisticsText.setPosition(5.f, 5.f);
