@@ -22,4 +22,7 @@ namespace	GUI
 	{
 		mText.setString(text);
 	}
+
+	void	Label::handleEvent(const sf::Event&)
+	{}
 }

@@ -15,6 +15,7 @@ namespace	GUI
 
 			virtual bool	isSelectable() const;
 			void			setText(const std::string& text);
+			virtual void	handleEvent(const sf::Event& event);
 
 		private:
 			void	draw(sf::RenderTarget& target, sf::RenderStates states) const;

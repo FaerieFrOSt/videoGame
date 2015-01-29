@@ -1,4 +1,5 @@
 #include "gui/button.h"
+#include "utility.h"
 
 namespace	GUI
 {
@@ -10,6 +11,7 @@ namespace	GUI
 		mText("", fonts.get(Fonts::Main), 16), mIsToggle(false)
 	{
 		mSprite.setTexture(mNormalTexture);
+		centerOrigin(mText);
 		mText.setPosition(sf::Vector2f(mNormalTexture.getSize() / 2u));
 	}
 
