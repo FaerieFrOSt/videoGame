@@ -27,6 +27,8 @@ namespace	GUI
 			virtual void	deactivate();
 			virtual void	handleEvent(const sf::Event& event);
 
+			sf::FloatRect	getLocalBounds() const;
+
 		private:
 			virtual void			draw(sf::RenderTarget& target, sf::RenderStates states) const;
 

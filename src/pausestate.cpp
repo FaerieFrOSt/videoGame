@@ -22,6 +22,12 @@ PauseState::PauseState(StateStack& stack, Context context) : State(stack, contex
 			requestStackPush(States::Menu);
 			});
 	mContainer.pack(menuButton);
+	centerOrigin(*pausedText);
+	pausedText->setPosition(context.window->getSize().x / 2u, context.window->getSize().y / 4u);
+	centerOrigin(*returnButton);
+	returnButton->setPosition(context.window->getSize().x / 2u, 2 * context.window->getSize().y / 4u);
+	centerOrigin(*menuButton);
+	menuButton->setPosition(context.window->getSize().x / 2u, 3 * context.window->getSize().y / 4u);
 }
 
 void	PauseState::draw()

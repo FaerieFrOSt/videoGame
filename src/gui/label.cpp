@@ -1,4 +1,5 @@
 #include "gui/label.h"
+#include "utility.h"
 
 namespace	GUI
 {
@@ -10,6 +11,11 @@ namespace	GUI
 	bool	Label::isSelectable() const
 	{
 		return false;
+	}
+
+	sf::FloatRect	Label::getLocalBounds() const
+	{
+		return mText.getLocalBounds();
 	}
 
 	void	Label::draw(sf::RenderTarget& target, sf::RenderStates states) const

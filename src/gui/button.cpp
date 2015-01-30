@@ -11,8 +11,6 @@ namespace	GUI
 		mText("", fonts.get(Fonts::Main), 16), mIsToggle(false)
 	{
 		mSprite.setTexture(mNormalTexture);
-		centerOrigin(mText);
-		mText.setPosition(sf::Vector2f(mNormalTexture.getSize() / 2u));
 	}
 
 	bool	Button::isSelectable() const
@@ -20,9 +18,16 @@ namespace	GUI
 		return true;
 	}
 
+	sf::FloatRect	Button::getLocalBounds() const
+	{
+		return mSprite.getLocalBounds();
+	}
+
 	void	Button::setText(const std::string& text)
 	{
 		mText.setString(text);
+		::centerOrigin(mText);
+		mText.setPosition(sf::Vector2f(mNormalTexture.getSize() / 2u));
 	}
 
 	void	Button::setToggle(bool toggle)
