@@ -18,13 +18,20 @@ SRCDIR = $(PREFIX)/src
 
 SRCSUBDIR = $(PREFIX)/src/gui
 
+OUT_DIR = obj/gui
+
 SRC = $(wildcard $(SRCDIR)/*$(SUFFIX)) $(wildcard $(SRCSUBDIR)/*$(SUFFIX))
 
 OBJDIR = $(PREFIX)/obj
 
 OBJ = $(subst $(SRCDIR), $(OBJDIR), $(SRC:$(SUFFIX)=.o))
 
-all: $(EXE)
+all: directories $(EXE)
+
+directories: ${OUT_DIR}
+
+${OUT_DIR}:
+	mkdir -p ${OUT_DIR}
 
 $(EXE): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ $^ $(INC) $(LIB)

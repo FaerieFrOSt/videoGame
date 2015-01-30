@@ -14,6 +14,7 @@ class	Player
 			MoveRight,
 			MoveUp,
 			MoveDown,
+			ActionCount,
 			Debug,
 			Pause,
 		};
